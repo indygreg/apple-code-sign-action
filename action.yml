@@ -1,0 +1,124 @@
+name: 'Apple code signing'
+description: 'Signs and notarizes Apple software using open source software'
+author: 'Gregory Szorc'
+
+inputs:
+  # This is the only required input.
+  input_path:
+    description: 'Path to file or directory to sign'
+    required: true
+
+  output_path:
+    description: 'Output path of signed entity. Leave blank to sign in place'
+
+  # Specify the actions you want to perform.
+
+  # Signing embeds a cryptographic signature of a code or application in the
+  # entity being signed.
+  sign:
+    description: 'Whether to sign'
+    default: 'true'
+
+  # Notarizing uploads a signed asset to Apple for scanning. If notarization
+  # is successful, Apple issues a "notarization ticket," which proves the
+  # validity of an entity.
+  notarize:
+    description: 'Whether to notarize'
+    default: 'false'
+
+  # Attaches a pre-issued "notarization ticket" to an entity.
+  staple:
+    description: 'Whether to staple a notarization ticket'
+    default: 'false'
+
+  # Specify rcodesign.toml config file(s) and an optional named profile
+  # to use. See https://gregoryszorc.com/docs/apple-codesign/stable/apple_codesign_rcodesign_config_files.html
+  # for more on config files.
+  #
+  # You can use multiline YAML syntax to define multiple files. e.g.
+  # 
+  # config_file: |
+  #   file_1.toml
+  #   file_2.toml
+
+  config_file:
+    description: 'Path to a custom rcodesign.toml config file to load'
+
+  profile:
+    description: 'rcodesign.toml config profile to use'
+
+  # For signing, choose the source of the code signing certificate from the
+  # following sets.
+
+  # Multiline YAML syntax is supported for defining multiple files.
+  pem_file:
+    description: 'Path to a file containing PEM encoded certificate data'
+
+  p12_file:
+    description: 'Path to a PKCS#12 / .p12 / .pfx file holding the code signing certificate'
+  p12_password:
+    description: 'Password to unlock `p12_file`'
+
+  # This setting only provides the public certificate. It needs to be combined
+  # with an additional setting that provides the private key corresponding to
+  # this certificate.
+  certificate_der_file:
+    description: 'Path to a file containing a DER encoded X.509 certificate'
+
+  # For remote signing, you need to specify a mechanism to initialize the
+  # secure signing session. We highly recommend using public key encryption
+  # instead of a shared secret. See
+  # https://gregoryszorc.com/docs/apple-codesign/stable/apple_codesign_remote_signing.html#session-agreement
+  # for more on the topic.
+
+  # You can obtain the public key by running `rcodesign analyze-certificate`,
+  # `rcodesign smartcard-scan`, `rcodesign keychain-print-certificates`, and
+  # other `rcodesign` commands to inspect code signing certificates.
+  remote_sign_public_key:
+    description: 'Public key of remote signer (likely begins with `MII`)'
+
+  remote_sign_public_key_pem_file:
+    description: 'Path to PEM file containing public key of remote signer'
+
+  remote_sign_shared_secret:
+    description: 'Shared secret string to use to bootstrap communication with remote signer'
+
+  # For notarizing, specify how to load the App Store Connect API credentials.
+  # See https://gregoryszorc.com/docs/apple-codesign/stable/apple_codesign_getting_started.html#obtaining-an-app-store-connect-api-key
+  # for more.
+
+  app_store_connect_api_key_json_file:
+    description: 'Path to a file containing the JSON encoded App Store Connect API Key'
+
+  app_store_connect_api_issuer:
+    description: 'App Store Connect issuer ID (likely a UUID)'
+  app_store_connect_api_key:
+    description: 'App Store Connect API key ID'
+
+  # Advanced options.
+
+  # Specified as a multiline string. Each argument is appended to the
+  # `rcodesign sign` arguments derived from other input variables.
+  #
+  # The input/output paths should NOT be part of these arguments.
+  sign_args:
+    description: 'Raw arguments to pass to `rcodesign sign`'
+
+  # Consider pinning to a known version of rcodesign to get deterministic
+  # behavior. We recommend using a rcodesign.toml file instead of using
+  # this mechanism.
+  rcodesign_version:
+    description: 'Version of the rcodesign tool to use'
+    default: '0.26.0'
+
+outputs:
+  output_path:
+    description: 'Path to signed/notarized/stapled entity'
+
+runs:
+  using: node20
+  main: dist/index.js
+
+branding:
+  icon: code
+  color: blue

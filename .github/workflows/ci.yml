@@ -1,0 +1,80 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "releases/*"
+
+jobs:
+  test-javascript:
+    name: JavaScript Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        id: npm-ci
+        run: npm ci
+
+      - name: Check Format
+        id: npm-format-check
+        run: npm run format:check
+
+      - name: Lint
+        id: npm-lint
+        run: npm run lint
+
+      #- name: Test
+      #  id: npm-ci-test
+      #  run: npm run ci-test
+
+  test-action:
+    name: GitHub Actions Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch rcodesign
+        run: |
+          curl -L https://github.com/indygreg/apple-platform-rs/releases/download/apple-codesign%2F0.26.0/apple-codesign-0.26.0-x86_64-unknown-linux-musl.tar.gz \
+            | tar --strip-components=1 -xvzf -
+          ./rcodesign debug-create-macho macho-binary
+          rm rcodesign COPYING
+
+      - name: Write PEM key to file
+        env:
+          PEM_KEY: ${{ secrets.DEVELOPER_ID_APPLICATION_PEM_KEY }}
+        run: |
+          echo $PEM_KEY | tr ' ' '\n' > key.pem
+
+      - name: Test Sign PEM Source
+        uses: ./
+        with:
+          input_path: macho-binary
+          output_path: macho-binary-pem
+          pem_file: |
+            key.pem
+            certs/self-signed-developer-id-application.pem
+
+      - name: Test Sign P12 Source
+        uses: ./
+        with:
+          input_path: macho-binary
+          output_path: macho-binary-p12
+          p12_file: certs/self-signed-developer-id-application.p12
+          p12_password: ${{ secrets.DEVELOPER_ID_APPLICATION_PASSWORD }}
