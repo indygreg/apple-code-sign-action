@@ -59,7 +59,7 @@
     "@actions/tool-cache": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.3",
+    "@babel/core": "^7.23.6",
     "@babel/eslint-parser": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
     "@vercel/ncc": "^0.38.1",
