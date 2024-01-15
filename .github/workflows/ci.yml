@@ -55,7 +55,7 @@ jobs:
         env:
           PEM_KEY: ${{ secrets.DEVELOPER_ID_APPLICATION_PEM_KEY }}
         run: |
-          echo $PEM_KEY | tr ' ' '\n' > key.pem
+          echo "$PEM_KEY" | tr ' ' '\n' > key.pem
 
       - name: Test Sign PEM Source
         uses: ./
