@@ -8,16 +8,7 @@
 # what is expected from the build.
 name: Check dist/
 
-on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'
-  pull_request:
-    paths-ignore:
-      - '**.md'
-  workflow_dispatch:
+on: [pull_request, push]
 
 jobs:
   check-dist:
