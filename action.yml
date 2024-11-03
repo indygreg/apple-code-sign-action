@@ -109,7 +109,7 @@ inputs:
   # this mechanism.
   rcodesign_version:
     description: 'Version of the rcodesign tool to use'
-    default: '0.26.0'
+    default: '0.28.0'
 
 outputs:
   output_path:
