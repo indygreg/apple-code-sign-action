@@ -1,6 +1,6 @@
 const core = require('@actions/core')
 const exec = require('@actions/exec')
-const tool_cache = require('@actions/tool-cache')
+const toolCache = require('@actions/tool-cache')
 const os = require('os')
 
 async function getRcodesign(version) {
@@ -48,14 +48,14 @@ async function getRcodesign(version) {
 
   core.info(`Downloading rcodesign from ${url}`)
 
-  const toolPath = await tool_cache.downloadTool(url)
+  const toolPath = await toolCache.downloadTool(url)
 
   let destDir
 
   if (url.endsWith('.tar.gz')) {
-    destDir = await tool_cache.extractTar(toolPath, 'rcodesign')
+    destDir = await toolCache.extractTar(toolPath, 'rcodesign')
   } else {
-    destDir = await tool_cache.extractZip(toolPath, 'rcodesign')
+    destDir = await toolCache.extractZip(toolPath, 'rcodesign')
   }
 
   let exe = `${destDir}/${directory}/rcodesign`
