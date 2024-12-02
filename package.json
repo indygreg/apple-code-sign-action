@@ -64,7 +64,7 @@
     "@babel/preset-env": "^7.26.0",
     "@vercel/ncc": "^0.38.2",
     "babel-preset-jest": "^29.6.3",
-    "eslint": "^8.56.0",
+    "eslint": "^9.16.0",
     "eslint-plugin-github": "^5.0.2",
     "eslint-plugin-jest": "^28.9.0",
     "jest": "^29.7.0",
