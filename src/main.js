@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as toolCache from '@actions/tool-cache'
-const os = require('os')
+import * as os from 'os'
 
 async function getRcodesign(version) {
   const platform = os.platform()

@@ -1,3 +1,3 @@
-const { run } = require('./main')
+import run from './main'
 
 run()
