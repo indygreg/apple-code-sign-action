@@ -1,4 +1,10 @@
 version: 2
+registries:
+  github-npm-registry:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{ secrets.DEPENDABOT_NPM_TOKEN }}
+
 updates:
   - package-ecosystem: github-actions
     directory: /
@@ -9,3 +15,5 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    registries:
+      - github-npm-registry
