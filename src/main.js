@@ -66,7 +66,7 @@ async function getRcodesign(version) {
   return exe
 }
 
-async function run() {
+export async function run() {
   try {
     const inputPath = core.getInput('input_path', { required: true })
     const outputPath = core.getInput('output_path')
