@@ -33256,9 +33256,5 @@ async function run() {
   }
 }
 
-module.exports = {
-  run
-};
-
 run();
 //# sourceMappingURL=index.js.map

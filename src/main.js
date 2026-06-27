@@ -202,7 +202,3 @@ export async function run() {
     core.setFailed(error.message)
   }
 }
-
-module.exports = {
-  run
-}
