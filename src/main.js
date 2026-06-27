@@ -1,6 +1,6 @@
-const core = require('@actions/core')
-const exec = require('@actions/exec')
-const toolCache = require('@actions/tool-cache')
+import * as core from '@actions/core'
+import * as exec from '@actions/exec'
+import * as toolCache from '@actions/tool-cache'
 const os = require('os')
 
 async function getRcodesign(version) {

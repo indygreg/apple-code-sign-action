@@ -1,12 +1,13 @@
 # Apple Code Signing and Notarization Action
 
-This action signs, notarizes, and/or staples Apple applications using the open source `rcodesign` tool from https://github.com/indygreg/apple-platform-rs/tree/main/apple-codesign.
+This action signs, notarizes, and/or staples Apple applications using the open
+source `rcodesign` tool from
+https://github.com/indygreg/apple-platform-rs/tree/main/apple-codesign.
 
 This action can be run from Linux, Windows, and macOS Actions Runners.
 
-This action is a thin veneer over downloading and invoking `rcodesign`.
-Advanced customers may want to forego this action and invoke `rcodesign`
-directly.
+This action is a thin veneer over downloading and invoking `rcodesign`. Advanced
+customers may want to forego this action and invoke `rcodesign` directly.
 
 ## Usage
 
@@ -66,7 +67,7 @@ steps:
 
 Sign using a PEM encoded code signing certificate stored in a secret.
 
-```yaml
+````yaml
 steps:
   - name: Write PEM encoded private key data to a file
     env:
@@ -102,9 +103,10 @@ steps:
       pem_file: |
         key.pem
         cert.pem
-```
+````
 
-Sign on a remote machine (requires running `rcodesign remote-sign` on another machine when this action is running).
+Sign on a remote machine (requires running `rcodesign remote-sign` on another
+machine when this action is running).
 
 ```yaml
 steps:

@@ -36,7 +36,7 @@ inputs:
   # for more on config files.
   #
   # You can use multiline YAML syntax to define multiple files. e.g.
-  # 
+  #
   # config_file: |
   #   file_1.toml
   #   file_2.toml
@@ -55,7 +55,8 @@ inputs:
     description: 'Path to a file containing PEM encoded certificate data'
 
   p12_file:
-    description: 'Path to a PKCS#12 / .p12 / .pfx file holding the code signing certificate'
+    description:
+      'Path to a PKCS#12 / .p12 / .pfx file holding the code signing certificate'
   p12_password:
     description: 'Password to unlock `p12_file`'
 
@@ -81,14 +82,16 @@ inputs:
     description: 'Path to PEM file containing public key of remote signer'
 
   remote_sign_shared_secret:
-    description: 'Shared secret string to use to bootstrap communication with remote signer'
+    description:
+      'Shared secret string to use to bootstrap communication with remote signer'
 
   # For notarizing, specify how to load the App Store Connect API credentials.
   # See https://gregoryszorc.com/docs/apple-codesign/stable/apple_codesign_getting_started.html#obtaining-an-app-store-connect-api-key
   # for more.
 
   app_store_connect_api_key_json_file:
-    description: 'Path to a file containing the JSON encoded App Store Connect API Key'
+    description:
+      'Path to a file containing the JSON encoded App Store Connect API Key'
 
   app_store_connect_api_issuer:
     description: 'App Store Connect issuer ID (likely a UUID)'
