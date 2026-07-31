@@ -98,6 +98,11 @@ inputs:
   app_store_connect_api_key:
     description: 'App Store Connect API key ID'
 
+  max_wait_seconds:
+    description:
+      'Maximum number of seconds to wait for notarization to complete'
+    default: '600'
+
   # Advanced options.
 
   # Specified as a multiline string. Each argument is appended to the

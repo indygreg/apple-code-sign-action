@@ -33144,6 +33144,7 @@ async function run() {
       'app_store_connect_api_issuer'
     );
     const appStoreConnectApiKey = getInput('app_store_connect_api_key');
+    const maxWaitSeconds = getInput('max_wait_seconds');
     const signArgs = getMultilineInput('sign_args');
     const rcodesignVersion = getInput('rcodesign_version');
 
@@ -33229,6 +33230,7 @@ async function run() {
         args.push('--wait');
       }
 
+      args.push('--max-wait-seconds', maxWaitSeconds);
       args.push(signedPath);
 
       await exec(rcodesign, args);

@@ -91,6 +91,7 @@ export async function run() {
       'app_store_connect_api_issuer'
     )
     const appStoreConnectApiKey = core.getInput('app_store_connect_api_key')
+    const maxWaitSeconds = core.getInput('max_wait_seconds')
     const signArgs = core.getMultilineInput('sign_args')
     const rcodesignVersion = core.getInput('rcodesign_version')
 
@@ -176,6 +177,7 @@ export async function run() {
         args.push('--wait')
       }
 
+      args.push('--max-wait-seconds', maxWaitSeconds)
       args.push(signedPath)
 
       await exec.exec(rcodesign, args)
