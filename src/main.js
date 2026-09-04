@@ -20,7 +20,7 @@ async function getRcodesign(version) {
 
     case 'linux':
       switch (arch) {
-        case 'aarch64':
+        case 'arm64':
           url += 'aarch64-unknown-linux-musl.tar.gz'
           directory += 'aarch64-unknown-linux-musl'
           break
